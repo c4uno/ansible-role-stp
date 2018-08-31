@@ -1,0 +1,13 @@
+---
+
+- name: restart stp
+  service:
+    name: vpnagentd
+    state: restarted
+  become: yes
+
+- name: restart stp
+  service:
+    name: vpnagentd
+    state: stoped
+  become: yes

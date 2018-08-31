@@ -1,0 +1,15 @@
+---
+
+- import_tasks: installation.yml
+  become: yes
+  tags:
+    - stp_install
+
+- import_tasks: disconnect.yml
+  tags:
+    - stp_disconnect
+
+- import_tasks: connect.yml
+  tags:
+    - stp_connect
+

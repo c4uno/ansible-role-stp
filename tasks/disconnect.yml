@@ -1,0 +1,4 @@
+---
+
+- name: C4UNO | Disconnect
+  command: '{{ stp_vpn_command }} disconnect {{ stp_host }}'

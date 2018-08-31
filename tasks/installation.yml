@@ -1,0 +1,53 @@
+---
+
+- name: Upload installer
+  copy:
+    src: vpnsetup.sh
+    dest: /tmp/vpnsetup.sh
+    mode: 0744
+
+- name: Install CISCO any connect secure
+  command: /tmp/vpnsetup.sh
+  args:
+    creates: "{{ stp_vpn_command }}"
+
+- name: Removed installer
+  file:
+    state: absent
+    src: /tmp/vpnsetup.sh
+
+- name: Copy certificate
+  command: mv ca ca.orig
+  args:
+    creates: ca.orig
+    chdir: /opt/.cisco/certificates
+
+- name: Link certificate
+  file:
+    state: link
+    src: /etc/ssl/certs
+    dest: /opt/.cisco/certificates/ca
+    force: yes
+  notify:
+  - restart stp
+
+- name: Add STP host to /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ stp_ip | replace(".", "\\.") }}'
+    line: '{{ stp_ip }} {{ stp_domain }} # Added by ansible'
+    insertbefore: # The following
+    owner: root
+    group: root
+    mode: 0644
+    state: present
+
+- name: Upload VPN script to monitoring
+  template:
+    src: vpn.sh
+    dest: "{{ stp_vpn_script }}"
+    mode: 0700
+    owner: root
+    group: root
+  tags:
+  - script

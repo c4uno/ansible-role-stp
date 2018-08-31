@@ -1,0 +1,10 @@
+---
+
+stp_host: vpn.stpmex.com
+stp_username: c4uno
+stp_password: secret
+stp_ip: 1.2.3.4
+stp_domain: prod.stpmex.com
+stp_vpn_command: /opt/cisco/anyconnect/bin/vpn
+stp_vpn_script: /usr/local/bin/vpn.sh
+stp_monitoring_vpn_refresh_time: 30

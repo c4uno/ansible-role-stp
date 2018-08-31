@@ -1,0 +1,18 @@
+galaxy_info:
+  author: c4uno
+  description: Install Ciscos' AnyConnect to STP Mexico
+  company: "c4uno"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.5
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial
+  galaxy_tags:
+  - vpn
+  - cisco
+  - anyconnect
+  - stp
+  - mexico
+  - spei

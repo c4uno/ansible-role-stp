@@ -1,0 +1,18 @@
+---
+
+- name: C4UNO | Connect
+  expect:
+    command: '{{ stp_vpn_command }} connect {{ stp_host }}'
+    responses:
+      'Connect Anyway\?\s\[y/n\]:': y
+      'Always trust this server and import the certificate\? \[y/n\]:': n
+      'Username:': "{{ stp_username }}"
+      'Password:': "{{ stp_password }}"
+  register: stp_connection_result
+
+- debug:
+    msg: '{{ stp_connection_result }}'
+
+- fail:
+    msg: '{{ stp_connection_result.stdout }}'
+  when: (stp_connection_result.stdout_lines | last) is search("Disconnected")
