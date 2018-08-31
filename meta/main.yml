@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: stp
   author: c4uno
   description: Install Ciscos' AnyConnect to STP Mexico
   company: "c4uno"
